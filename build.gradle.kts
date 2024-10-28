@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.9.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
+    id("io.ktor.plugin") version "2.3.8"
     application
 }
 
@@ -20,7 +22,7 @@ dependencies {
     // Content negotiation and JSON serialization
     implementation("io.ktor:ktor-server-content-negotiation:2.0.0")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.0.0")
-
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
     // Call logging
     implementation("io.ktor:ktor-server-call-logging:2.0.0")
 

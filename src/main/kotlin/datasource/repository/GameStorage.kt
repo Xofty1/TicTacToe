@@ -4,7 +4,7 @@ import domain.model.Game
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
-class GameStorage {
+object GameStorage {
     private val games = ConcurrentHashMap<UUID, Game>()
 
     // Метод для сохранения игры

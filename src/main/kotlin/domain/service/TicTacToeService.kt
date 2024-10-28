@@ -1,31 +1,15 @@
 package domain.service
 
+import datasource.repository.GameStorage
 import domain.model.Game
 import domain.model.GameBoard
-import domain.utils.DIAGONALS
 import domain.utils.RESULT
 import domain.utils.TURN
 import java.util.*
 
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-
-fun main() {
-    embeddedServer(Netty, port = 8080) {
-        routing {
-            get("/") {
-                call.respondText("Hello, world!")
-            }
-        }
-    }.start(wait = true)
-}
-
 data class Move(var row: Int, var col: Int, val score: Int)
-class TicTacToeService : GameService {
+object TicTacToeService : GameService {
 
     override fun getNextMove(game: Game, turn: TURN): Pair<Int, Int> {
         val isMaximizing = (turn.type == TURN.X.type)
@@ -109,56 +93,26 @@ class TicTacToeService : GameService {
         }
         return RESULT.CONTINUE
     }
-//
-//    override fun isGameOver(gameBoard: GameBoard): Boolean {
-//        return isDiagonals(gameBoard, TURN.X) ||
-//                isRows(gameBoard, TURN.X) ||
-//                isColumns(gameBoard, TURN.X) ||
-//                isDiagonals(gameBoard, TURN.O) ||
-//                isRows(gameBoard, TURN.O) ||
-//                isColumns(gameBoard, TURN.O)
-//    }
-//
-//    fun isDiagonals(gameBoard: GameBoard, turn: TURN): Boolean {
-//        return isDiagonal(gameBoard, DIAGONALS.LeftUpToRightDown, turn) ||
-//                isDiagonal(gameBoard, DIAGONALS.RigthUpToLeftDown, turn)
-//    }
-//
-//    fun isColumns(gameBoard: GameBoard,turn: TURN): Boolean {
-//        return isColumn(gameBoard,0, turn) ||
-//                isColumn(gameBoard,1, turn) ||
-//                isColumn(gameBoard,2, turn)
-//    }
-//
-//    fun isRows(gameBoard: GameBoard, turn: TURN): Boolean {
-//        return isRow(gameBoard,0, turn) ||
-//                isRow(gameBoard,1, turn) ||
-//                isRow(gameBoard,2, turn)
-//    }
-//
-//    fun isDiagonal(gameBoard: GameBoard, diagonals: DIAGONALS, turn: TURN): Boolean {
-//        return when (diagonals) {
-//            DIAGONALS.LeftUpToRightDown ->
-//                gameBoard.board[0][0] == turn.type &&
-//                        gameBoard.board[1][1] == turn.type &&
-//                        gameBoard.board[2][2] == turn.type
-//
-//            DIAGONALS.RigthUpToLeftDown ->
-//                gameBoard.board[0][2] == turn.type &&
-//                        gameBoard.board[1][1] == turn.type &&
-//                        gameBoard.board[2][0] == turn.type
-//        }
-//    }
-//
-//
-//    fun isColumn(gameBoard: GameBoard, column: Int, turn: TURN): Boolean {
-//        return (0..2).all { gameBoard.board[it][column] == turn.type }
-//    }
-//
-//    fun isRow(gameBoard: GameBoard, row: Int, turn: TURN): Boolean {
-//        return (0..2).all { gameBoard.board[row][it] == turn.type }
-//    }
 
+
+    // В файле GameService.kt в domain
+    fun updateGame(game: Game): Game {
+
+        this.getNextMove(game, game.turn)
+        return game.apply {
+            this.turn = if (this.turn == TURN.X) TURN.O else TURN.X
+        }
+    }
+
+    fun createNewGame(): Game {
+        val game = Game(
+            id = UUID.randomUUID(),
+            board = GameBoard(),
+            turn = TURN.X
+        )
+        GameStorage.saveGame(game)
+        return game
+    }
 }
 
 

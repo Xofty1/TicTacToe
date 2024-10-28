@@ -1,9 +1,13 @@
 package domain.model
 
 import domain.utils.TURN
+import kotlinx.serialization.Serializable
+import web.module.UUIDSerializer
 import java.util.UUID
 
+@Serializable
 data class Game (
+    @Serializable(with = UUIDSerializer::class)
     val id: UUID,
     val board: GameBoard,
     var turn: TURN
