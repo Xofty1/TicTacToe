@@ -13,8 +13,3 @@ enum class RESULT(val type: Int) {
     CONTINUE(2)
 }
 
-enum class DIAGONALS{
-    LeftUpToRightDown,
-    RigthUpToLeftDown
-}
-

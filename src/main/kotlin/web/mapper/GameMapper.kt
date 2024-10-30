@@ -4,27 +4,27 @@ import domain.model.Game
 import domain.model.GameBoard
 import domain.utils.TURN
 import web.model.GameDTO
+import java.util.*
 
 object GameMapper {
     fun fromDomain(game: Game): GameDTO {
         var turn = "O"
-        if (game.turn == TURN.X){
+        if (game.turn == TURN.X) {
             turn = "X"
         }
         return GameDTO(
-            id = game.id,
             board = game.board.board,
             turn = turn
         )
     }
 
-    fun toDomain(gameDTO: GameDTO): Game {
+    fun toDomain(gameId: UUID, gameDTO: GameDTO): Game {
         var turn = TURN.O
-        if (gameDTO.turn == "X"){
+        if (gameDTO.turn == "X") {
             turn = TURN.X
         }
         return Game(
-            id = gameDTO.id,
+            id = gameId,
             board = GameBoard(gameDTO.board),
             turn = turn
         )

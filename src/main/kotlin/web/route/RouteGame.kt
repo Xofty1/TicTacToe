@@ -1,6 +1,7 @@
 package web.route
 
 import datasource.repository.GameStorage
+import datasource.repository.RepositoryService
 import web.model.GameDTO
 import domain.service.TicTacToeService.updateGame
 
@@ -9,10 +10,13 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.koin.ktor.ext.inject
 import web.mapper.GameMapper
 import java.util.*
 
 fun Route.routeGame() {
+    val repositoryService: RepositoryService by inject()
+
     post("/game/{id}") {
 
         val gameId = call.parameters["id"]?.let {
@@ -29,15 +33,17 @@ fun Route.routeGame() {
         }
 
         val request = call.receive<GameDTO>()
-        if (request.id != gameId) {
-            call.respond(HttpStatusCode.BadRequest, "ID игры в параметре и теле не совпадают")
+        val existingGame = repositoryService.getGameById(gameId)
+
+        if (existingGame == null) {
+            call.respond(HttpStatusCode.NotFound, "Игра не найдена")
             return@post
         }
 
-        val updatedGame = updateGame(GameMapper.toDomain(gameDTO = request))
-        // Нет корректного функционала с добавлением в хранилище
-        GameStorage.removeGame(updatedGame.id)
-        GameStorage.saveGame(updatedGame)
+        val updatedGame = updateGame(GameMapper.toDomain(gameId = gameId, gameDTO = request), null)
+
+        repositoryService.updateGame(updatedGame)
+
         call.respond(GameMapper.fromDomain(updatedGame))
         println("Игра обновлена")
     }

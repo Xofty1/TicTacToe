@@ -11,8 +11,8 @@ import java.util.*
 data class Move(var row: Int, var col: Int, val score: Int)
 object TicTacToeService : GameService {
 
-    override fun getNextMove(game: Game, turn: TURN): Pair<Int, Int> {
-        val isMaximizing = (turn.type == TURN.X.type)
+    override fun getNextMove(game: Game): Pair<Int, Int> {
+        val isMaximizing = (game.turn.type == TURN.X.type)
         val bestMove = minimax(game.board, isMaximizing)
         return Pair(bestMove.row, bestMove.col)
     }
@@ -80,12 +80,12 @@ object TicTacToeService : GameService {
         return true
     }
 
-    fun makeMove(game: Game, move: Move, turn: TURN): RESULT {
+    fun makeMove(game: Game, cell: Pair<Int, Int>): RESULT {
         if (!isBoardFull(game.board.board)) {
-            game.board.board[move.row][move.col] = turn.type
+            game.board.board[cell.first][cell.second] = game.turn.type
         }
-        if (checkWin(game.board.board, turn.type)) {
-            println("Победил $turn")
+        if (checkWin(game.board.board, game.turn.type)) {
+            println("Победил ${game.turn}")
             return RESULT.WIN
         }
         if (isBoardFull(game.board.board)) {
@@ -96,9 +96,11 @@ object TicTacToeService : GameService {
 
 
     // В файле GameService.kt в domain
-    fun updateGame(game: Game): Game {
-
-        this.getNextMove(game, game.turn)
+    fun updateGame(game: Game, nextMove: Pair<Int, Int>?): Game {
+        var newMove = nextMove
+        if (newMove == null)
+            newMove =  this.getNextMove(game)
+        makeMove(game, newMove)
         return game.apply {
             this.turn = if (this.turn == TURN.X) TURN.O else TURN.X
         }
@@ -110,12 +112,11 @@ object TicTacToeService : GameService {
             board = GameBoard(),
             turn = TURN.X
         )
-        GameStorage.saveGame(game)
         return game
     }
 }
 
-
+//
 //fun main() {
 //    val game = Game(
 //        UUID(5, 5),

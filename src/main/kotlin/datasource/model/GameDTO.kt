@@ -1,6 +1,5 @@
 package datasource.model
 
-import domain.model.GameBoard
 import domain.utils.TURN
 import java.util.*
 

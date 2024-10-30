@@ -27,8 +27,8 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging:2.0.0")
 
     // Koin for Dependency Injection
-    implementation("io.insert-koin:koin-ktor:3.1.4")
-    implementation("io.insert-koin:koin-core:3.1.4")
+    implementation("io.insert-koin:koin-ktor:3.5.0")
+    implementation("io.insert-koin:koin-core:3.5.0")
 
     // Logback for logging
     implementation("ch.qos.logback:logback-classic:1.2.6")
