@@ -7,6 +7,7 @@ import web.route.createGameRoute
 import web.route.getGameRoute
 import web.route.routeGame
 import org.koin.ktor.plugin.Koin
+import web.route.routeMakeMove
 
 fun Application.configureKoin() {
     install(Koin) {
@@ -19,5 +20,6 @@ fun Application.configureRouting() {
         routeGame()
         getGameRoute()
         createGameRoute()
+        routeMakeMove()
     }
 }

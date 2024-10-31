@@ -1,6 +1,5 @@
 package domain.service
 
-import datasource.repository.GameStorage
 import domain.model.Game
 import domain.model.GameBoard
 import domain.utils.RESULT
@@ -80,7 +79,7 @@ object TicTacToeService : GameService {
         return true
     }
 
-    fun makeMove(game: Game, cell: Pair<Int, Int>): RESULT {
+    private fun makeMove(game: Game, cell: Pair<Int, Int>): RESULT {
         if (!isBoardFull(game.board.board)) {
             game.board.board[cell.first][cell.second] = game.turn.type
         }
@@ -107,12 +106,15 @@ object TicTacToeService : GameService {
     }
 
     fun createNewGame(): Game {
-        val game = Game(
+        return Game(
             id = UUID.randomUUID(),
             board = GameBoard(),
             turn = TURN.X
         )
-        return game
+    }
+
+    fun cellToCoordinate(cell: Int): Pair<Int, Int>{
+        return Pair((cell/3), (cell%3))
     }
 }
 

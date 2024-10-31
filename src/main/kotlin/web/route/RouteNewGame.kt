@@ -1,6 +1,5 @@
 package web.route
 
-import datasource.repository.GameStorage
 import datasource.repository.RepositoryService
 import domain.service.TicTacToeService.createNewGame
 import io.ktor.http.*

@@ -1,10 +1,7 @@
 package web.route
 
-import datasource.repository.GameStorage
 import datasource.repository.RepositoryService
-import web.model.GameDTO
 import domain.service.TicTacToeService.updateGame
-
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -12,6 +9,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import web.mapper.GameMapper
+import web.model.GameDTO
 import java.util.*
 
 fun Route.routeGame() {

@@ -1,7 +1,6 @@
 package domain.service
 
 import domain.model.Game
-import domain.utils.TURN
 
 interface GameService {
     fun getNextMove(game: Game): Pair<Int, Int>
