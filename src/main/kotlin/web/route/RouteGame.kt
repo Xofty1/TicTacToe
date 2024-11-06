@@ -46,4 +46,3 @@ fun Route.routeGame() {
         println("Игра обновлена")
     }
 }
-

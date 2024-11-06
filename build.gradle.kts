@@ -33,6 +33,13 @@ dependencies {
     // Logback for logging
     implementation("ch.qos.logback:logback-classic:1.2.6")
 
+    // HTML Builder для создания HTML-контента
+    implementation("io.ktor:ktor-server-html-builder:2.0.0")
+
+    // Дополнительные зависимости, если используются
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.5")
+
+    implementation("io.ktor:ktor-server-cors:2.3.0")
     // Testing
     testImplementation("io.ktor:ktor-server-tests:2.0.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")

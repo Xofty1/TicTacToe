@@ -37,6 +37,7 @@ fun Route.routeMakeMove() {
             return@post
         }
     }
+
     post("game/makeMove/{id}/{cell}") {
         val gameId = call.parameters["id"]?.let {
             UUID.fromString(it)
@@ -68,3 +69,4 @@ fun Route.routeMakeMove() {
 
     }
 }
+
