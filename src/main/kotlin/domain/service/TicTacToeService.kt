@@ -2,7 +2,7 @@ package domain.service
 
 import domain.model.Game
 import domain.model.GameBoard
-import domain.utils.RESULT
+import domain.utils.STATUS
 import domain.utils.TURN
 import java.util.*
 
@@ -70,7 +70,7 @@ object TicTacToeService : GameService {
     }
 
     // Проверка, заполнено ли поле
-    fun isBoardFull(board: Array<IntArray>): Boolean {
+    private fun isBoardFull(board: Array<IntArray>): Boolean {
         return board.all { row -> row.all { it != TURN.NONE.type } }
     }
 
@@ -79,18 +79,21 @@ object TicTacToeService : GameService {
         return true
     }
 
-    private fun makeMove(game: Game, cell: Pair<Int, Int>): RESULT {
-        if (!isBoardFull(game.board.board)) {
+    private fun makeMove(game: Game, cell: Pair<Int, Int>): Boolean {
+        return if (game.board.board[cell.first][cell.second] == TURN.NONE.type && //
+            game.status != STATUS.O_WIN && game.status != STATUS.X_WIN) {
             game.board.board[cell.first][cell.second] = game.turn.type
+
+            if (checkWin(game.board.board, game.turn.type)) {
+                game.status = if (game.turn == TURN.X) STATUS.X_WIN else STATUS.O_WIN
+            }
+
+
+            game.turn = if (game.turn == TURN.X) TURN.O else TURN.X
+
+            true
         }
-        if (checkWin(game.board.board, game.turn.type)) {
-            println("Победил ${game.turn}")
-            return RESULT.WIN
-        }
-        if (isBoardFull(game.board.board)) {
-            return RESULT.DRAW
-        }
-        return RESULT.CONTINUE
+        else false
     }
 
 
@@ -99,10 +102,9 @@ object TicTacToeService : GameService {
         var newMove = nextMove
         if (newMove == null)
             newMove =  this.getNextMove(game)
-        makeMove(game, newMove)
-        return game.apply {
-            this.turn = if (this.turn == TURN.X) TURN.O else TURN.X
-        }
+        val isMoveAvailable = makeMove(game, newMove)
+
+        return game
     }
 
     fun createNewGame(): Game {

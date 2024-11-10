@@ -1,5 +1,6 @@
 package domain.model
 
+import domain.utils.STATUS
 import domain.utils.TURN
 import kotlinx.serialization.Serializable
 import web.module.UUIDSerializer
@@ -10,5 +11,6 @@ data class Game(
     @Serializable(with = UUIDSerializer::class)
     val id: UUID,
     val board: GameBoard,
-    var turn: TURN
+    var turn: TURN,
+    var status: STATUS = STATUS.NONE
 )

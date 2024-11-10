@@ -6,10 +6,10 @@ enum class TURN(val type: Int) {
     NONE(0)
 }
 
-enum class RESULT(val type: Int) {
-    WIN(1),
-    LOSE(-1),
-    DRAW(0),
-    CONTINUE(2)
+enum class STATUS(val result: String) {
+    X_WIN("X WON"),
+    O_WIN("O WON"),
+    DRAW("DRAW"),
+    NONE("")
 }
 

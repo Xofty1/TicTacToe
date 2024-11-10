@@ -4,6 +4,14 @@ const newGameButton = document.getElementById("newGameButton");
 let currentGame = null;
 let playerIsFirst = true;
 
+
+function cellClickHandler(event) {
+  if (event.target.classList.contains("cell")) {
+    const cellIndex = event.target.dataset.cell;
+    makeMove(cellIndex);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   newGameButton.addEventListener("click", () => {
     fetch("http://localhost:8080/game/new", { method: "POST" })
@@ -12,38 +20,35 @@ document.addEventListener("DOMContentLoaded", () => {
         currentGame = data;
       })
       .catch((error) => console.error("Error creating new game:", error));
+      document.getElementById("board").addEventListener("click", cellClickHandler);
+     cells.forEach((cell) => {cell.textContent = "";});
+     document.getElementById("status").textContent = "Let's play!";
+
   });
 
-  document.getElementById("board").addEventListener("click", (event) => {
-    if (event.target.classList.contains("cell")) {
-      const cellIndex = event.target.dataset.cell;
-      makeMove(cellIndex);
-    }
-  });
+
   document.getElementById("gameMode").addEventListener("change", (event) => {
     gameMode = event.target.value;
     console.log("Game Mode changed to:", gameMode);
   });
 });
 
-cells.forEach((cell) => cell.addEventListener("click", handleCellClick));
 
-function handleCellClick(event) {
-  const cell = event.target;
-  if (cell.textContent === "") {
-    cell.textContent = currentTurn;
-  }
-}
-
-function updateTurn(turn) {
-  const turnElement = document.getElementById("turn");
-  turnElement.textContent = `Current turn: ${turn}`;
-  currentTurn = turn;
+function updateStatus(data) {
+  const statusElement = document.getElementById("status");
+  if (data.status == ""){
+    statusElement.textContent = `Current turn: ${data.turn}`;
+    currentTurn = data.turn;
+    }
+  else{
+    statusElement.textContent = data.status;
+    document.getElementById("board").removeEventListener("click", cellClickHandler);
+    }
 }
 
 function updateData(data) {
   updateBoard(data.board);
-  updateTurn(data.turn);
+  updateStatus(data);
 }
 
 async function makeMove(cellIndex) {

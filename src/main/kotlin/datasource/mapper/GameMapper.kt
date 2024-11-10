@@ -10,7 +10,8 @@ object GameMapper {
         return GameDTO(
             id = game.id,
             board = game.board.board,
-            turn = game.turn
+            turn = game.turn,
+            status = game.status
         )
     }
 
@@ -18,7 +19,8 @@ object GameMapper {
         return Game(
             id = gameDTO.id,
             board = GameBoard(gameDTO.board),
-            turn = gameDTO.turn
+            turn = gameDTO.turn,
+            status = gameDTO.status
         )
     }
 }
