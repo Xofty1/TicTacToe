@@ -80,29 +80,29 @@ object TicTacToeService : GameService {
     }
 
     private fun makeMove(game: Game, cell: Pair<Int, Int>): Boolean {
-        return if (game.board.board[cell.first][cell.second] == TURN.NONE.type && //
-            game.status != STATUS.O_WIN && game.status != STATUS.X_WIN) {
+        return if (game.board.board[cell.first][cell.second] == TURN.NONE.type &&
+            game.status != STATUS.O_WIN && game.status != STATUS.X_WIN && game.status != STATUS.DRAW
+        ) {
             game.board.board[cell.first][cell.second] = game.turn.type
 
             if (checkWin(game.board.board, game.turn.type)) {
                 game.status = if (game.turn == TURN.X) STATUS.X_WIN else STATUS.O_WIN
+            } else if (game.board.isFull()) {
+                game.status = STATUS.DRAW
             }
 
 
             game.turn = if (game.turn == TURN.X) TURN.O else TURN.X
 
             true
-        }
-        else false
+        } else false
     }
 
-
-    // В файле GameService.kt в domain
     fun updateGame(game: Game, nextMove: Pair<Int, Int>?): Game {
         var newMove = nextMove
         if (newMove == null)
-            newMove =  this.getNextMove(game)
-        val isMoveAvailable = makeMove(game, newMove)
+            newMove = this.getNextMove(game)
+        val isMoveAvailable = makeMove(game, newMove) // на будущее)
 
         return game
     }
@@ -115,8 +115,8 @@ object TicTacToeService : GameService {
         )
     }
 
-    fun cellToCoordinate(cell: Int): Pair<Int, Int>{
-        return Pair((cell/3), (cell%3))
+    fun cellToCoordinate(cell: Int): Pair<Int, Int> {
+        return Pair((cell / 3), (cell % 3))
     }
 }
 

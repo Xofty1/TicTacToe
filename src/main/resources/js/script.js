@@ -6,6 +6,7 @@ let playerIsFirst = true;
 const statusField = document.getElementById("status");
 const boardElement = document.getElementById("board");
 let gameMode = "vsPlayer";
+let gameStatus = "";
 
 function cellClickHandler(event) {
   if (event.target.classList.contains("cell")) {
@@ -41,12 +42,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+function getGameStatus(status) {
+  if (status === "X WON") {
+    return "X winning";
+  } else if (status === "O WON") {
+    return "O winning";
+  } else if (status === "DRAW") {
+    return "Draw";
+  } else {
+    return "Unknown result";
+  }
+}
+
 function updateStatus(data) {
-  if (data.status == "") {
+  if (data.status === "") {
     statusField.textContent = `Current turn: ${data.turn}`;
     currentTurn = data.turn;
   } else {
-    statusField.textContent = data.status;
+    gameStatus = getGameStatus(data.status);
+    statusField.textContent = gameStatus;
     boardElement.removeEventListener("click", cellClickHandler);
   }
 }
@@ -132,7 +146,7 @@ async function loadGame(gameId) {
 
     if (response.ok) {
       const game = await response.json();
-      renderGame(game);
+      renderGame(game, gameId);
     } else {
       console.error(
         `Game with ID ${gameId} not found. Status: ${response.status}`
@@ -144,8 +158,14 @@ async function loadGame(gameId) {
 }
 
 // Отображение игры на поле
-function renderGame(game) {
+function renderGame(game, id) {
   updateBoard(game.board);
-  statusField.textContent = `Game loaded: ${game.id}`;
+  if (game.status === "NONE") {
+    statusField.textContent = `Current turn: ${game.turn}`;
+    currentTurn = game.turn;
+  } else {
+    gameStatus = getGameStatus(game.status);
+    statusField.textContent = gameStatus;
+  }
   boardElement.addEventListener("click", cellClickHandler);
 }

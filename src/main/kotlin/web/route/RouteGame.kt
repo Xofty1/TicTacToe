@@ -44,7 +44,6 @@ fun Route.routeGame() {
         repositoryService.updateGame(updatedGame)
 
         call.respond(GameMapper.fromDomain(updatedGame))
-        println("Игра обновлена")
     }
 }
 

@@ -8,6 +8,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
+import web.mapper.GameMapper
 import java.util.*
 
 fun Route.createGameRoute() {
@@ -15,9 +16,7 @@ fun Route.createGameRoute() {
 
     post("/game/new") {
         val newGame = createNewGame()
-        println(newGame.id) // Дополнить функционалом добавления в хранилище
         repositoryService.saveGame(newGame)
-        println(newGame.id)
         call.respond(HttpStatusCode.Created, newGame.id.toString())
     }
 }
@@ -32,10 +31,11 @@ fun Route.getGameRoute() {
         }
 
         val game = repositoryService.getGameById(gameId)
-        if (game == null) {
+        val domainGame = game?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
+        if (domainGame == null) {
             call.respond(HttpStatusCode.NotFound, "Game not found")
         } else {
-            call.respond(HttpStatusCode.OK, game)
+            call.respond(HttpStatusCode.OK, GameMapper.fromDomain(domainGame))
         }
     }
 }

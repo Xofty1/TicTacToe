@@ -4,14 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe Game</title>
+    <link rel="icon" href="/image/icon.png" type="image/x-icon" />
     <link rel="stylesheet" href="../styles/style.css" />
   </head>
   <body>
     <div class="wrapper">
-      <label for="gameMode">Выберите режим игры:</label>
+      <label for="gameMode">Choose game mode:</label>
       <select id="gameMode">
-        <option value="twoPlayers">Игра с другом</option>
-        <option value="vsComputer">Игра с компьютером</option>
+        <option value="twoPlayers">vs Player</option>
+        <option value="vsComputer">vs Computer</option>
       </select>
       <div class="game-container">
         <h1>Tic-Tac-Toe</h1>
@@ -28,8 +29,9 @@
         </div>
       </div>
       <div class="status" id="status">Do you wonna play?</div>
-      <button id="newGameButton">Start New Game</button>
-      <a id="games" href="games.html">Check previous games</a>
+      <button id="newGameButton" class="button">Start New Game</button>
+      <a id="games" href="games.html">
+        <button id="checksGames" class="button">Check previous games</button></a>
     </div>
     <script src="../js/script.js"></script>
   </body>

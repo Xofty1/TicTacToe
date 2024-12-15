@@ -13,7 +13,21 @@ function renderGameList(games) {
   gameListElement.innerHTML = "";
   Object.entries(games).forEach(([id, game]) => {
     const li = document.createElement("li");
-    li.textContent = `Game ID: ${id} - ${game.status}`;
+
+    let gameStatus = "";
+
+    if (game.status === "X_WIN") {
+      gameStatus = "X winning";
+    } else if (game.status === "O_WIN") {
+      gameStatus = "O winning";
+    } else if (game.status === "DRAW") {
+      gameStatus = "Draw";
+    } else {
+      gameStatus = "Unknown result";
+    }
+
+    li.innerHTML = `Game ID: ${id}<br>Game status: ${gameStatus}`;
+
     li.dataset.id = id;
     li.addEventListener("click", () => selectGame(id));
     gameListElement.appendChild(li);

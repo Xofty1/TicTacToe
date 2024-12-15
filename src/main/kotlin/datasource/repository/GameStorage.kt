@@ -12,8 +12,8 @@ class GameStorage {
     fun getGames(): ConcurrentHashMap<UUID, GameDTO>{
         return games
     }
-    fun saveGame(game: Game) {
-        games[game.id] =  GameMapperDatasource.fromDomain(game)
+    fun saveGame(game: GameDTO, id: UUID) {
+        games[id] =  game
     }
 
     fun getGame(gameId: UUID): GameDTO? {
@@ -24,12 +24,12 @@ class GameStorage {
         games.remove(gameId)
     }
 
-    fun updateGame(game: Game) {
+    fun updateGame(game: GameDTO, id: UUID) {
         // Проверяем, существует ли игра с данным ID
-        if (games.containsKey(game.id)) {
-            games[game.id] = GameMapperDatasource.fromDomain(game)
+        if (games.containsKey(id)) {
+            games[id] = game
         } else {
-            throw IllegalArgumentException("Game with ID ${game.id} does not exist.")
+            throw IllegalArgumentException("Game with ID ${id} does not exist.")
         }
     }
 }

@@ -13,5 +13,6 @@ fun Application.configureStatic() {
         staticResources("/js", "js")
         
         staticResources("/styles", "styles")
+        staticResources("/image", "image")
     }
 }

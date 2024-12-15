@@ -65,7 +65,7 @@ fun Route.routeMakeMove() {
             call.respond(GameMapper.fromDomain(updatedGame))
         }
         else {
-            call.respond(HttpStatusCode.NotFound, "Игра не найдена")
+            call.respond(HttpStatusCode.NotFound, "Game not found")
             return@post
         }
 
