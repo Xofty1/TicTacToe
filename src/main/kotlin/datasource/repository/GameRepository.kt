@@ -1,7 +1,9 @@
 package datasource.repository
 
+import datasource.model.GameDTO
 import domain.model.Game
 import java.util.*
+import java.util.concurrent.ConcurrentHashMap
 
 class GameRepository(private val gameStorage: GameStorage) {
 
@@ -9,7 +11,7 @@ class GameRepository(private val gameStorage: GameStorage) {
         gameStorage.saveGame(game)
     }
 
-    fun getGame(gameId: UUID): Game? {
+    fun getGame(gameId: UUID): GameDTO? {
         return gameStorage.getGame(gameId)
     }
 
@@ -21,5 +23,7 @@ class GameRepository(private val gameStorage: GameStorage) {
         return gameStorage.updateGame(game)
     }
 
-
+    fun getAllGames(): ConcurrentHashMap<UUID, GameDTO> {
+        return gameStorage.getGames()
+    }
 }

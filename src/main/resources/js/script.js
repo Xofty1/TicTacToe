@@ -3,7 +3,9 @@ let currentTurn = "";
 const newGameButton = document.getElementById("newGameButton");
 let currentGame = null;
 let playerIsFirst = true;
-
+const statusField = document.getElementById("status");
+const boardElement = document.getElementById("board");
+let gameMode = "vsPlayer";
 
 function cellClickHandler(event) {
   if (event.target.classList.contains("cell")) {
@@ -14,36 +16,39 @@ function cellClickHandler(event) {
 
 document.addEventListener("DOMContentLoaded", () => {
   newGameButton.addEventListener("click", () => {
-    fetch("http://localhost:8080/game/new", { method: "POST" })
+    fetch("/game/new", { method: "POST" })
       .then((response) => response.text())
       .then((data) => {
         currentGame = data;
       })
       .catch((error) => console.error("Error creating new game:", error));
-      document.getElementById("board").addEventListener("click", cellClickHandler);
-     cells.forEach((cell) => {cell.textContent = "";});
-     document.getElementById("status").textContent = "Let's play!";
-
+    boardElement.addEventListener("click", cellClickHandler);
+    cells.forEach((cell) => {
+      cell.textContent = "";
+    });
+    statusField.textContent = "Let's play!";
   });
-
 
   document.getElementById("gameMode").addEventListener("change", (event) => {
     gameMode = event.target.value;
     console.log("Game Mode changed to:", gameMode);
   });
+
+  const selectedGameId = localStorage.getItem("selectedGameId");
+  if (selectedGameId) {
+    loadGame(selectedGameId);
+    localStorage.removeItem("selectedGameId");
+  }
 });
 
-
 function updateStatus(data) {
-  const statusElement = document.getElementById("status");
-  if (data.status == ""){
-    statusElement.textContent = `Current turn: ${data.turn}`;
+  if (data.status == "") {
+    statusField.textContent = `Current turn: ${data.turn}`;
     currentTurn = data.turn;
-    }
-  else{
-    statusElement.textContent = data.status;
-    document.getElementById("board").removeEventListener("click", cellClickHandler);
-    }
+  } else {
+    statusField.textContent = data.status;
+    boardElement.removeEventListener("click", cellClickHandler);
+  }
 }
 
 function updateData(data) {
@@ -67,15 +72,12 @@ async function makeMove(cellIndex) {
 
 async function playerMove(cellIndex) {
   try {
-    const response = await fetch(
-      `http://localhost:8080/game/makeMove/${currentGame}/${cellIndex}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`/game/makeMove/${currentGame}/${cellIndex}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     console.log(data); // Выводим ответ с новым состоянием игры
     updateData(data);
@@ -86,15 +88,12 @@ async function playerMove(cellIndex) {
 
 async function computerMove() {
   try {
-    const response = await fetch(
-      `http://localhost:8080/game/makeMove/${currentGame}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`/game/makeMove/${currentGame}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     console.log(data); // Выводим ответ с новым состоянием игры
     updateData(data);
@@ -118,4 +117,35 @@ function updateBoard(board) {
       }
     });
   });
+}
+
+// Загружаем игру по ID
+async function loadGame(gameId) {
+  try {
+    const response = await fetch(`/game/${gameId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    currentGame = gameId;
+
+    if (response.ok) {
+      const game = await response.json();
+      renderGame(game);
+    } else {
+      console.error(
+        `Game with ID ${gameId} not found. Status: ${response.status}`
+      );
+    }
+  } catch (error) {
+    console.error(`Error loading game with ID ${gameId}:`, error);
+  }
+}
+
+// Отображение игры на поле
+function renderGame(game) {
+  updateBoard(game.board);
+  statusField.textContent = `Game loaded: ${game.id}`;
+  boardElement.addEventListener("click", cellClickHandler);
 }

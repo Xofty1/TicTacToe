@@ -1,17 +1,22 @@
 package datasource.repository
 
+import datasource.mapper.GameMapperDatasource
+import datasource.model.GameDTO
 import domain.model.Game
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
 class GameStorage {
-    private val games = ConcurrentHashMap<UUID, Game>()
+    private val games = ConcurrentHashMap<UUID, GameDTO>()
 
+    fun getGames(): ConcurrentHashMap<UUID, GameDTO>{
+        return games
+    }
     fun saveGame(game: Game) {
-        games[game.id] = game
+        games[game.id] =  GameMapperDatasource.fromDomain(game)
     }
 
-    fun getGame(gameId: UUID): Game? {
+    fun getGame(gameId: UUID): GameDTO? {
         return games[gameId]
     }
 
@@ -22,7 +27,7 @@ class GameStorage {
     fun updateGame(game: Game) {
         // Проверяем, существует ли игра с данным ID
         if (games.containsKey(game.id)) {
-            games[game.id] = game
+            games[game.id] = GameMapperDatasource.fromDomain(game)
         } else {
             throw IllegalArgumentException("Game with ID ${game.id} does not exist.")
         }

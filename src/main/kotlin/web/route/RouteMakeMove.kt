@@ -1,5 +1,6 @@
 package web.route
 
+import datasource.mapper.GameMapperDatasource
 import datasource.repository.RepositoryService
 import domain.model.Game
 import domain.service.TicTacToeService
@@ -26,6 +27,7 @@ fun Route.routeMakeMove() {
 
 
         val existingGame = repositoryService.getGameById(gameId)
+            ?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
         val updatedGame: Game
         if (existingGame != null) {
             updatedGame = TicTacToeService.updateGame(existingGame, null)
@@ -55,6 +57,7 @@ fun Route.routeMakeMove() {
         }
 
         val existingGame = repositoryService.getGameById(gameId)
+            ?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
         val updatedGame: Game
         if (existingGame != null) {
             updatedGame = TicTacToeService.updateGame(existingGame, TicTacToeService.cellToCoordinate(cell))
