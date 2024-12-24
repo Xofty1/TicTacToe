@@ -1,14 +1,17 @@
-package domain.service
+package datasource.repository
 
 import domain.model.Game
 import domain.model.GameBoard
+import domain.model.User
+import domain.service.GameService
 import domain.utils.STATUS
 import domain.utils.TURN
+import sun.security.util.Password
 import java.util.*
 
 
 data class Move(var row: Int, var col: Int, val score: Int)
-object TicTacToeService : GameService {
+class TicTacToeService(val repository: GameRepository, val userRepository: UserRepository) : GameService {
 
     override fun getNextMove(game: Game): Pair<Int, Int> {
         val isMaximizing = (game.turn.type == TURN.X.type)
@@ -101,7 +104,7 @@ object TicTacToeService : GameService {
     fun updateGame(game: Game, nextMove: Pair<Int, Int>?): Game {
         var newMove = nextMove
         if (newMove == null)
-            newMove = this.getNextMove(game)
+            newMove = getNextMove(game)
         val isMoveAvailable = makeMove(game, newMove) // на будущее)
 
         return game
@@ -118,43 +121,8 @@ object TicTacToeService : GameService {
     fun cellToCoordinate(cell: Int): Pair<Int, Int> {
         return Pair((cell / 3), (cell % 3))
     }
-}
 
-//
-//fun main() {
-//    val game = Game(
-//        UUID(5, 5),
-//        GameBoard(),
-//        TURN.X
-//    )
-//
-//    fun printGameBoard(game: Game) {
-//        for (i in 0..2) {
-//            for (j in 0..2) {
-//                print("${game.board.board[i][j]} ")
-//            }
-//            println()
-//        }
-//        println()
-//    }
-//
-//    val tttService = TicTacToeService()
-//    println("Выберете за кого играть :")
-//    if (readLine() == "X") {
-//        println("Делайте ход")
-//        var res = RESULT.CONTINUE
-//        while (res == RESULT.CONTINUE) {
-//            val (x, y) = readLine()!!.split(" ").map { it.toInt() }
-//
-//            res = tttService.makeMove(game, Move(x, y, 0), TURN.X)
-//            printGameBoard(game)
-//            if (res == RESULT.CONTINUE) {
-//                val comp = tttService.getNextMove(game, turn = TURN.O)
-//                res = tttService.makeMove(game, Move(comp.first, comp.second, 0), TURN.O)
-//                printGameBoard(game)
-//            } else break
-//        }
-//    }
-//
-//}
+
+
+}
 

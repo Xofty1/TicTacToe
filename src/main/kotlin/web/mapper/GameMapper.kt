@@ -26,7 +26,7 @@ object GameMapper {
             turn = TURN.X
         }
         var status = STATUS.NONE
-        when (gameDTO.status){
+        when (gameDTO.status) {
             STATUS.O_WIN.result -> status = STATUS.O_WIN
             STATUS.X_WIN.result -> status = STATUS.X_WIN
             STATUS.DRAW.result -> status = STATUS.DRAW

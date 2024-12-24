@@ -1,8 +1,6 @@
 package web.route
 
-import datasource.mapper.GameMapperDatasource
-import datasource.repository.RepositoryService
-import domain.service.TicTacToeService.createNewGame
+import datasource.repository.TicTacToeService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -12,17 +10,17 @@ import web.mapper.GameMapper
 import java.util.*
 
 fun Route.createGameRoute() {
-    val repositoryService: RepositoryService by inject()
+    val service: TicTacToeService by inject()
 
     post("/game/new") {
-        val newGame = createNewGame()
-        repositoryService.saveGame(newGame)
+        val newGame = service.createNewGame()
+        service.repository.saveGame(newGame)
         call.respond(HttpStatusCode.Created, newGame.id.toString())
     }
 }
 
 fun Route.getGameRoute() {
-    val repositoryService: RepositoryService by inject()
+    val service: TicTacToeService by inject()
     get("/game/{id}") {
         val gameId = call.parameters["id"]?.let { UUID.fromString(it) }
         if (gameId == null) {
@@ -30,12 +28,11 @@ fun Route.getGameRoute() {
             return@get
         }
 
-        val game = repositoryService.getGameById(gameId)
-        val domainGame = game?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
-        if (domainGame == null) {
+        val game = service.repository.getGameById(gameId)
+        if (game == null) {
             call.respond(HttpStatusCode.NotFound, "Game not found")
         } else {
-            call.respond(HttpStatusCode.OK, GameMapper.fromDomain(domainGame))
+            call.respond(HttpStatusCode.OK, GameMapper.fromDomain(game))
         }
     }
 }

@@ -17,6 +17,7 @@ fun Application.configureCORS() {
         allowCredentials = true
     }
 }
+
 fun Application.configureKoin() {
     install(Koin) {
         modules(gameModule)
@@ -26,6 +27,8 @@ fun Application.configureKoin() {
 fun Application.configureRouting() {
     routing {
         routeGame()
+        routeNewUser()
+        routeGetUser()
         getGameRoute()
         createGameRoute()
         routeMakeMove()

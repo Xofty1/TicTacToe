@@ -1,9 +1,7 @@
 package web.route
 
-import datasource.mapper.GameMapperDatasource
-import datasource.repository.RepositoryService
 import domain.model.Game
-import domain.service.TicTacToeService
+import datasource.repository.TicTacToeService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -13,7 +11,7 @@ import web.mapper.GameMapper
 import java.util.*
 
 fun Route.routeMakeMove() {
-    val repositoryService: RepositoryService by inject()
+    val service: TicTacToeService by inject()
 
     post("game/makeMove/{id}") {
         val gameId = call.parameters["id"]?.let {
@@ -26,15 +24,13 @@ fun Route.routeMakeMove() {
         }
 
 
-        val existingGame = repositoryService.getGameById(gameId)
-            ?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
+        val existingGame = service.repository.getGameById(gameId)
         val updatedGame: Game
         if (existingGame != null) {
-            updatedGame = TicTacToeService.updateGame(existingGame, null)
-            repositoryService.updateGame(updatedGame)
+            updatedGame = service.updateGame(existingGame, null)
+            service.repository.updateGame(updatedGame)
             call.respond(GameMapper.fromDomain(updatedGame))
-        }
-        else {
+        } else {
             call.respond(HttpStatusCode.NotFound, "Игра не найдена")
             return@post
         }
@@ -56,15 +52,13 @@ fun Route.routeMakeMove() {
             return@post
         }
 
-        val existingGame = repositoryService.getGameById(gameId)
-            ?.let { it1 -> GameMapperDatasource.toDomain(it1, gameId) }
+        val existingGame = service.repository.getGameById(gameId)
         val updatedGame: Game
         if (existingGame != null) {
-            updatedGame = TicTacToeService.updateGame(existingGame, TicTacToeService.cellToCoordinate(cell))
-            repositoryService.updateGame(updatedGame)
+            updatedGame = service.updateGame(existingGame, service.cellToCoordinate(cell))
+            service.repository.updateGame(updatedGame)
             call.respond(GameMapper.fromDomain(updatedGame))
-        }
-        else {
+        } else {
             call.respond(HttpStatusCode.NotFound, "Game not found")
             return@post
         }

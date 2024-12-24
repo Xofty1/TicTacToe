@@ -1,8 +1,6 @@
 package web.route
 
-import datasource.mapper.GameMapperDatasource
-import datasource.repository.RepositoryService
-import domain.service.TicTacToeService.updateGame
+import datasource.repository.TicTacToeService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -14,7 +12,7 @@ import web.model.GameDTO
 import java.util.*
 
 fun Route.routeGame() {
-    val repositoryService: RepositoryService by inject()
+    val service: TicTacToeService by inject()
 
     post("/game/{id}") {
 
@@ -32,16 +30,16 @@ fun Route.routeGame() {
         }
 
         val request = call.receive<GameDTO>()
-        val existingGame = repositoryService.getGameById(gameId)
+        val existingGame = service.repository.getGameById(gameId)
 
         if (existingGame == null) {
             call.respond(HttpStatusCode.NotFound, "Игра не найдена")
             return@post
         }
 
-        val updatedGame = updateGame(GameMapper.toDomain(gameId = gameId, gameDTO = request), null)
+        val updatedGame = service.updateGame(GameMapper.toDomain(gameId = gameId, gameDTO = request), null)
 
-        repositoryService.updateGame(updatedGame)
+        service.repository.updateGame(updatedGame)
 
         call.respond(GameMapper.fromDomain(updatedGame))
     }
@@ -49,9 +47,9 @@ fun Route.routeGame() {
 
 
 fun Route.routeAllGames() {
-    val repositoryService: RepositoryService by inject()
+    val service: TicTacToeService by inject()
     get("/games") {
-        val games = repositoryService.getAllGames()
+        val games = service.repository.getAllGames()
         call.respond(games)
     }
 }
