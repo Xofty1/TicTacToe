@@ -40,6 +40,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.5")
 
     implementation("io.ktor:ktor-server-cors:2.3.0")
+
+    implementation("at.favre.lib:bcrypt:0.10.2")
     // Testing
     testImplementation("io.ktor:ktor-server-tests:2.0.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.8.10")

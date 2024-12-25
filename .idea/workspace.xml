@@ -5,29 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e20d9e17-1881-4f1a-b459-1731d5291fa4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/Main.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/GameRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/GameRepository.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/GameStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/GameStorage.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/RepositoryService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/di/DI_Service.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/di/DI_Service.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/service/TicTacToeService.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserStorage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/module/ConfigureRouting.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/module/ConfigureRouting.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteGame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteGame.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteMakeMove.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteMakeMove.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/html/games.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/html/games.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/untitled/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,26 +33,32 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2qfyCRWkEbyJvyYnQCKbKikpn3d" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/school21/Kotlin_Bootcamp/TicTacToe",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build TicTacToe.executor&quot;: &quot;Run&quot;,
+    &quot;Ktor.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/school21/Kotlin_Bootcamp/TicTacToe&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -105,7 +102,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735067795419</updated>
-      <workItem from="1735067796571" duration="22000" />
+      <workItem from="1735067796571" duration="801000" />
+      <workItem from="1735124224113" duration="9296000" />
     </task>
     <servers />
   </component>

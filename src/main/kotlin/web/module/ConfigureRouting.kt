@@ -32,6 +32,8 @@ fun Application.configureRouting() {
         getGameRoute()
         createGameRoute()
         routeMakeMove()
+        routeGetUsers()
         routeAllGames()
+
     }
 }

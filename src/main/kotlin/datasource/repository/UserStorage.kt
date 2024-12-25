@@ -2,6 +2,7 @@ package datasource.repository
 
 import datasource.model.GameDTO
 import datasource.model.UserDTO
+import domain.model.User
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.log
@@ -23,6 +24,14 @@ class UserStorage {
 
     fun getUser(login: String): UserDTO? {
         return users[login]
+    }
+
+    fun updateUser(user: UserDTO, login: String) {
+        users[login] = user
+    }
+
+    fun getUsers(login: String): ConcurrentHashMap<String, UserDTO> {
+        return users
     }
 
     fun removeGame(login: String) {
