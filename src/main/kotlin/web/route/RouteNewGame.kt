@@ -30,7 +30,7 @@ fun Route.createGameRoute() {
         val (login, password) = credentials
 
         // Поиск пользователя
-        val user = service.userRepository.getUserByLogin(login, password)
+        val user = service.userRepository.getUserByLoginAndPassword(login, password)
         if (user == null) {
             call.respond(HttpStatusCode.Unauthorized, "Invalid login or password")
             return@post

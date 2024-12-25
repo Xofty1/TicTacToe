@@ -20,12 +20,21 @@ class UserRepository(private val userStorage: UserStorage) {
         userStorage.updateUser(UserMapperDatasource.fromDomain(user), user.login)
     }
 
-    fun getUserByLogin(login: String, password: String): User? {
+    fun getUserByLoginAndPassword(login: String, password: String): User? {
         val findUser = userStorage.getUser(login)
         return if (findUser != null && password == findUser.password) {
             UserMapperDatasource.toDomain(findUser, login)
         } else {
             null
+        }
+    }
+
+    fun getUserByLogin(login: String): Boolean {
+        val findUser = userStorage.getUser(login)
+        return if (findUser != null) {
+            true
+        } else {
+            false
         }
     }
 
