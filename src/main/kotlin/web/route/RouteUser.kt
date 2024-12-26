@@ -64,8 +64,8 @@ fun Route.routeNewUser() {
         }
 
         // Создаем пользователя
-        val hashedPassword = hashPasswordBase64(password) // Хеширование пароля
-        val newUser = User(login, hashedPassword, CopyOnWriteArrayList())
+//        val hashedPassword = hashPasswordBase64(password) // Хеширование пароля
+        val newUser = User(login, password, CopyOnWriteArrayList())
         service.userRepository.saveUser(newUser)
 
         // Возвращаем успешный ответ
@@ -85,7 +85,6 @@ fun verifyPassword(password: String, hashedPassword: String): Boolean {
 }
 
 
-
 fun Route.routeGetUsers() {
     val service: TicTacToeService by inject()
 
@@ -96,7 +95,6 @@ fun Route.routeGetUsers() {
         return@get
     }
 }
-
 
 
 fun Route.routeGetUser() {
@@ -160,13 +158,24 @@ fun Route.userLoginRoute() {
 
 
 }
+
 private fun decodeBasicAuth(authHeader: String): Pair<String, String>? {
-    return try {
-        val base64Credentials = authHeader.removePrefix("Basic ").trim()
-        val decodedCredentials = String(Base64.getDecoder().decode(base64Credentials))
-        val split = decodedCredentials.split(":", limit = 2)
-        if (split.size == 2) split[0] to split[1] else null
-    } catch (e: IllegalArgumentException) {
-        null // Невалидный Base64
+    try {
+        // Удаляем префикс "Basic "
+        val base64Credentials = authHeader.removePrefix("Basic ")
+
+        // Декодируем Base64
+        val decodedBytes = Base64.getDecoder().decode(base64Credentials)
+        val decodedString = String(decodedBytes, Charsets.UTF_8)
+
+        // Разделяем строку по символу ":"
+        val parts = decodedString.split(":", limit = 2)
+        println(parts)
+        if (parts.size == 2) {
+            return Pair(parts[0], parts[1]) // Возвращаем логин и пароль
+        }
+    } catch (e: Exception) {
+        e.printStackTrace() // Логируем ошибку для отладки
     }
+    return null // Возвращаем null в случае ошибки
 }
