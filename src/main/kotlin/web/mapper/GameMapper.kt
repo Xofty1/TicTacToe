@@ -16,7 +16,9 @@ object GameMapper {
         return GameDTO(
             board = game.board.board,
             turn = turn,
-            status = game.status.result
+            status = game.status.result,
+            firstUserLogin = game.firstUserLogin,
+            secondUserLogin = game.secondUserLogin
         )
     }
 
@@ -35,7 +37,9 @@ object GameMapper {
             id = gameId,
             board = GameBoard(gameDTO.board),
             turn = turn,
-            status = status
+            status = status,
+            firstUserLogin = gameDTO.firstUserLogin,
+            secondUserLogin = gameDTO.secondUserLogin
         )
     }
 }

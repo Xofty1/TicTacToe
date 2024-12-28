@@ -7,6 +7,5 @@ import java.util.concurrent.CopyOnWriteArrayList
 
 @Serializable
 data class UserDTO (
-    val password: String,
-    val games: Map<String, GameDTO>
+    val password: String
 )

@@ -1,5 +1,6 @@
 package web.route
 
+import at.favre.lib.crypto.bcrypt.BCrypt
 import datasource.repository.TicTacToeService
 import domain.model.User
 import io.ktor.http.*
@@ -9,28 +10,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import web.mapper.UserMapper
-import java.util.concurrent.CopyOnWriteArrayList
-import at.favre.lib.crypto.bcrypt.BCrypt
 import web.model.UserDTO
 import java.security.MessageDigest
 import java.util.*
-
-//fun Route.routeNewUser() {
-//    val service: TicTacToeService by inject()
-//
-//    post("/user/new/{login}/{password}") {
-//        val login = call.parameters["login"]
-//        val password = call.parameters["password"]
-//        if (login == null || password == null) {
-//            call.respond(HttpStatusCode.BadRequest, "Invalid USER data")
-//            return@post
-//        }
-//        val newUser = User(login, password, CopyOnWriteArrayList())
-//        service.userRepository.saveUser(newUser)
-//        call.respond(HttpStatusCode.Created, newUser.login)
-//        return@post
-//    }
-//}
 
 fun Route.routeNewUser() {
     val service: TicTacToeService by inject()
@@ -65,7 +47,7 @@ fun Route.routeNewUser() {
 
         // Создаем пользователя
 //        val hashedPassword = hashPasswordBase64(password) // Хеширование пароля
-        val newUser = User(login, password, CopyOnWriteArrayList())
+        val newUser = User(login, password)
         service.userRepository.saveUser(newUser)
 
         // Возвращаем успешный ответ
@@ -129,53 +111,33 @@ fun Route.userLoginRoute() {
     val service: TicTacToeService by inject()
 
     post("/user/login") {
-        // Извлечение заголовка Authorization
-        val authHeader = call.request.headers["Authorization"]
-        if (authHeader.isNullOrEmpty() || !authHeader.startsWith("Basic ")) {
-            call.respond(HttpStatusCode.Unauthorized, "Missing or invalid Authorization header")
-            return@post
-        }
-
-        // Декодируем Basic Auth
-        val credentials = decodeBasicAuth(authHeader)
-        if (credentials == null) {
-            call.respond(HttpStatusCode.Unauthorized, "Invalid credentials format")
-            return@post
-        }
-
+        val credentials = call.getCredentialsOrRespondUnauthorized() ?: return@post
         val (login, password) = credentials
 
-        // Поиск пользователя
+        // Проверяем пользователя
         val user = service.userRepository.getUserByLoginAndPassword(login, password)
         if (user == null) {
             call.respond(HttpStatusCode.Unauthorized, "Invalid login or password")
             return@post
         }
 
-        // Отправляем ответ с идентификатором новой игры
+        // Отправляем успешный ответ
         call.respond(HttpStatusCode.OK, UserMapper.fromDomain(user))
     }
-
-
 }
 
-private fun decodeBasicAuth(authHeader: String): Pair<String, String>? {
-    try {
-        // Удаляем префикс "Basic "
-        val base64Credentials = authHeader.removePrefix("Basic ")
 
-        // Декодируем Base64
-        val decodedBytes = Base64.getDecoder().decode(base64Credentials)
-        val decodedString = String(decodedBytes, Charsets.UTF_8)
 
-        // Разделяем строку по символу ":"
-        val parts = decodedString.split(":", limit = 2)
-        println(parts)
-        if (parts.size == 2) {
-            return Pair(parts[0], parts[1]) // Возвращаем логин и пароль
-        }
-    } catch (e: Exception) {
-        e.printStackTrace() // Логируем ошибку для отладки
+
+suspend fun ApplicationCall.getCredentialsOrRespondUnauthorized(): Pair<String, String>? {
+    val authHeader = request.headers["Authorization"]
+    val credentials = AuthUtils.extractCredentials(authHeader)
+    if (credentials == null) {
+        respond(HttpStatusCode.Unauthorized, "Missing or invalid Authorization header")
     }
-    return null // Возвращаем null в случае ошибки
+    return credentials
 }
+
+
+
+

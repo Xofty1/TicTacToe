@@ -6,6 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="e20d9e17-1881-4f1a-b459-1731d5291fa4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/GameMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/GameMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/TicTacToeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/TicTacToeService.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/model/Game.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/domain/model/Game.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/model/GameDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/model/GameDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +29,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin Object" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -95,7 +114,7 @@
       <workItem from="1735224400031" duration="6280000" />
       <workItem from="1735300850971" duration="5344000" />
       <workItem from="1735331731128" duration="24000" />
-      <workItem from="1735420686308" duration="39000" />
+      <workItem from="1735420686308" duration="1471000" />
     </task>
     <servers />
   </component>

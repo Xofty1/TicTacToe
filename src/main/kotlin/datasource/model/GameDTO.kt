@@ -11,4 +11,6 @@ data class GameDTO(
     val board: Array<IntArray>,
     var turn: TURN,
     var status: STATUS,
+    var firstUserLogin: String,
+    var secondUserLogin: String? = null,
 )

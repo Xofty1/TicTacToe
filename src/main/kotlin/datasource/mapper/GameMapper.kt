@@ -11,7 +11,9 @@ object GameMapperDatasource {
         return GameDTO(
             board = game.board.board,
             turn = game.turn,
-            status = game.status
+            status = game.status,
+            firstUserLogin = game.firstUserLogin,
+            secondUserLogin = game.secondUserLogin
         )
     }
 
@@ -21,7 +23,9 @@ object GameMapperDatasource {
             id = id,
             board = GameBoard(gameDTO.board),
             turn = gameDTO.turn,
-            status = gameDTO.status
+            status = gameDTO.status,
+            firstUserLogin = gameDTO.firstUserLogin,
+            secondUserLogin = gameDTO.secondUserLogin
         )
     }
 }

@@ -14,22 +14,9 @@ fun Route.createGameRoute() {
 
     post("/game/new") {
         // Извлечение заголовка Authorization
-        val authHeader = call.request.headers["Authorization"]
-        if (authHeader.isNullOrEmpty() || !authHeader.startsWith("Basic ")) {
-            call.respond(HttpStatusCode.Unauthorized, "Missing or invalid Authorization header")
-            return@post
-        }
-
-        // Декодируем Basic Auth
-        val credentials = decodeBasicAuth(authHeader)
-        if (credentials == null) {
-            call.respond(HttpStatusCode.Unauthorized, "Invalid credentials format")
-            return@post
-        }
-
+        val credentials = call.getCredentialsOrRespondUnauthorized() ?: return@post
         val (login, password) = credentials
 
-        // Поиск пользователя
         val user = service.userRepository.getUserByLoginAndPassword(login, password)
         if (user == null) {
             call.respond(HttpStatusCode.Unauthorized, "Invalid login or password")
@@ -37,28 +24,15 @@ fun Route.createGameRoute() {
         }
 
         // Создаем новую игру
-        val newGame = service.createNewGame()
+        val newGame = service.createNewGame(user.login)
 
         // Сохраняем игру в глобальном репозитории
         service.repository.saveGame(newGame)
 
-        // Добавляем игру пользователю
-        user.games.add(newGame)
-        service.userRepository.updateUser(user) // Сохраняем изменения в репозитории
+        service.userRepository.updateUser(user)
 
         // Отправляем ответ с идентификатором новой игры
         call.respond(HttpStatusCode.Created, newGame.id.toString())
-    }
-}
-
-private fun decodeBasicAuth(authHeader: String): Pair<String, String>? {
-    return try {
-        val base64Credentials = authHeader.removePrefix("Basic ").trim()
-        val decodedCredentials = String(Base64.getDecoder().decode(base64Credentials))
-        val split = decodedCredentials.split(":", limit = 2)
-        if (split.size == 2) split[0] to split[1] else null
-    } catch (e: IllegalArgumentException) {
-        null // Невалидный Base64
     }
 }
 

@@ -110,11 +110,12 @@ class TicTacToeService(val repository: GameRepository, val userRepository: UserR
         return game
     }
 
-    fun createNewGame(): Game {
+    fun createNewGame(login: String): Game {
         return Game(
             id = UUID.randomUUID(),
             board = GameBoard(),
-            turn = TURN.X
+            turn = TURN.X,
+            firstUserLogin = login
         )
     }
 
