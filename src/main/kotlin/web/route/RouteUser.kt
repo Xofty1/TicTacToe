@@ -115,7 +115,7 @@ fun Route.routeGetUser() {
         }
 
         val user = service.userRepository.getUserByLogin(login)
-        if (user != null) {
+        if (user) {
             call.respond(HttpStatusCode.OK, true)
             return@post
         } else {
