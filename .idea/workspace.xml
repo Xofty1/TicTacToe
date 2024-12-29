@@ -6,19 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e20d9e17-1881-4f1a-b459-1731d5291fa4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/GameMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/GameMapper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/mapper/UserMapperDatasource.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/GameDTO.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/model/UserDTO.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/TicTacToeService.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/TicTacToeService.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/model/Game.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/domain/model/Game.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/domain/model/User.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/GameMapper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/mapper/UserMapper.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/model/GameDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/model/GameDTO.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/model/UserDTO.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteNewGame.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,23 +38,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Gradle.Build TicTacToe.executor": "Run",
-    "Ktor.MainKt.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Admin/Desktop/school21/Kotlin_Bootcamp/TicTacToe",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Gradle.Build TicTacToe.executor&quot;: &quot;Run&quot;,
+    &quot;Ktor.MainKt.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/school21/Kotlin_Bootcamp/TicTacToe&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -114,7 +103,8 @@
       <workItem from="1735224400031" duration="6280000" />
       <workItem from="1735300850971" duration="5344000" />
       <workItem from="1735331731128" duration="24000" />
-      <workItem from="1735420686308" duration="1471000" />
+      <workItem from="1735420686308" duration="2667000" />
+      <workItem from="1735464662782" duration="3540000" />
     </task>
     <servers />
   </component>

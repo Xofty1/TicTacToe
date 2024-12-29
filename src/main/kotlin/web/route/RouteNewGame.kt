@@ -3,10 +3,13 @@ package web.route
 import datasource.repository.TicTacToeService
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import web.mapper.GameMapper
+import web.model.GameDTO
+import web.model.UserDTO
 import java.util.*
 
 fun Route.createGameRoute() {
@@ -14,6 +17,12 @@ fun Route.createGameRoute() {
 
     post("/game/new") {
         // Извлечение заголовка Authorization
+        val request = try {
+            call.receive<GameDTO>()
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.BadRequest, "Invalid request format")
+            return@post
+        }
         val credentials = call.getCredentialsOrRespondUnauthorized() ?: return@post
         val (login, password) = credentials
 
@@ -22,9 +31,9 @@ fun Route.createGameRoute() {
             call.respond(HttpStatusCode.Unauthorized, "Invalid login or password")
             return@post
         }
-
+        val requestGame = request
         // Создаем новую игру
-        val newGame = service.createNewGame(user.login)
+        val newGame = service.createNewGame(user.login, requestGame.secondUserLogin)
 
         // Сохраняем игру в глобальном репозитории
         service.repository.saveGame(newGame)
@@ -32,7 +41,7 @@ fun Route.createGameRoute() {
         service.userRepository.updateUser(user)
 
         // Отправляем ответ с идентификатором новой игры
-        call.respond(HttpStatusCode.Created, newGame.id.toString())
+        call.respond(HttpStatusCode.Created, mapOf(newGame.id.toString() to GameMapper.fromDomain(newGame)))
     }
 }
 
