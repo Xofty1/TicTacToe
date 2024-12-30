@@ -8,7 +8,9 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.math.log
 
 class UserStorage {
-    private val users = ConcurrentHashMap<String, UserDTO>()
+    private val users = ConcurrentHashMap<String, UserDTO>().apply {
+        put("Computer", UserDTO("admin123"))
+    }
 
     fun getUsers(): ConcurrentHashMap<String, UserDTO> {
         return users
