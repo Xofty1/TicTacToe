@@ -3,6 +3,7 @@ package datasource.repository
 import at.favre.lib.crypto.bcrypt.BCrypt
 import datasource.mapper.UserMapperDatasource
 import domain.model.User
+import kotlinx.html.InputType
 import web.mapper.UserMapper
 
 class UserRepository(private val userStorage: UserStorage) {
@@ -36,6 +37,11 @@ class UserRepository(private val userStorage: UserStorage) {
         } else {
             false
         }
+    }
+
+    fun getPasswordByLogin(login: String): String? {
+        val findUser = userStorage.getUser(login)
+        return findUser?.password
     }
 
 

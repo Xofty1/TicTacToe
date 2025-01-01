@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e20d9e17-1881-4f1a-b459-1731d5291fa4" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserStorage.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserStorage.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserRepository.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/datasource/repository/UserRepository.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/module/ConfigureRouting.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/module/ConfigureRouting.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteGame.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteGame.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/web/route/RouteUser.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +107,10 @@
       <workItem from="1735331731128" duration="24000" />
       <workItem from="1735420686308" duration="2667000" />
       <workItem from="1735464662782" duration="4141000" />
-      <workItem from="1735578925091" duration="6325000" />
+      <workItem from="1735578925091" duration="7081000" />
+      <workItem from="1735633117970" duration="596000" />
+      <workItem from="1735723594354" duration="3666000" />
+      <workItem from="1735728220208" duration="14698000" />
     </task>
     <servers />
   </component>

@@ -31,10 +31,11 @@ fun Application.configureRouting() {
         routeGetUser()
         userLoginRoute()
         getGameRoute()
+        routeJoinToGame()
         createGameRoute()
         routeMakeMove()
         routeGetUsers()
         routeAllGames()
-
+        routeGetUserPassword()
     }
 }

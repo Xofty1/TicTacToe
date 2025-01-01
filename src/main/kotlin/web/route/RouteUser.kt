@@ -8,6 +8,7 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import kotlinx.serialization.Serializable
 import org.koin.ktor.ext.inject
 import web.mapper.UserMapper
 import web.model.UserDTO
@@ -84,13 +85,13 @@ fun Route.routeGetUser() {
 
     post("/user/exist") {
         val request = try {
-            call.receive<String>()
+            call.receive<LoginRequest>()
         } catch (e: Exception) {
             call.respond(HttpStatusCode.BadRequest, "Invalid request format")
             return@post
         }
 
-        val login = request
+        val login = request.login
         if (login.isBlank()) {
             call.respond(HttpStatusCode.BadRequest, "Login cannot be empty")
             return@post
@@ -102,6 +103,36 @@ fun Route.routeGetUser() {
             return@post
         } else {
             call.respond(HttpStatusCode.NotFound, false)
+            return@post
+        }
+    }
+}
+@Serializable
+data class LoginRequest(val login: String)
+fun Route.routeGetUserPassword() {
+    val service: TicTacToeService by inject()
+
+    post("/user/password") {
+        val request = try {
+            call.receive<LoginRequest>()
+        } catch (e: Exception) {
+            call.respond(HttpStatusCode.BadRequest, e.message ?: "Invalid request format")
+            return@post
+        }
+
+        val login = request.login
+        println(login)
+        if (login.isBlank()) {
+            call.respond(HttpStatusCode.BadRequest, "Login cannot be empty")
+            return@post
+        }
+
+        val password = service.userRepository.getPasswordByLogin(login)
+        if (password != null) {
+            call.respond(HttpStatusCode.OK, password)
+            return@post
+        } else {
+            call.respond(HttpStatusCode.NotFound, login)
             return@post
         }
     }
@@ -125,8 +156,6 @@ fun Route.userLoginRoute() {
         call.respond(HttpStatusCode.OK, UserMapper.fromDomain(user))
     }
 }
-
-
 
 
 suspend fun ApplicationCall.getCredentialsOrRespondUnauthorized(): Pair<String, String>? {

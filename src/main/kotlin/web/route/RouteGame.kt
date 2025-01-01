@@ -53,3 +53,27 @@ fun Route.routeAllGames() {
         call.respond(games)
     }
 }
+
+fun Route.routeJoinToGame() {
+    val service: TicTacToeService by inject()
+    post("/game/join/{id}") {
+
+        val gameId = call.parameters["id"]?.let { UUID.fromString(it) }
+        if (gameId == null) {
+            call.respond(HttpStatusCode.BadRequest, "Invalid game ID format")
+            return@post
+        }
+        val credentials = call.getCredentialsOrRespondUnauthorized() ?: return@post
+        val (login, password) = credentials
+        val game = service.repository.getGameById(gameId)
+        if (game != null) {
+            game.secondUserLogin = login
+            service.repository.updateGame(game)
+            call.respond(GameMapper.fromDomain(game))
+            return@post
+        }
+        else {
+            call.respond(HttpStatusCode.NotFound, "Game not found")
+        }
+    }
+}
